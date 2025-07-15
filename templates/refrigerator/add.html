@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+- Add -
+{% endblock %}
+
+{% block contents %}
+<div class="add">
+  <h1>食材追加ページ</h1>
+  <form action="{% url 'add' %}" method="post">
+    {% csrf_token %}
+  <div>
+      <label for="{{ form.name.id_for_label }}">食材名:</label>
+      {{ form.name }}
+      {% if form.name.errors %}
+        {% for error in form.name.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
+      {% endif %}
+  </div>
+  <div>
+      <label for="{{ form.quantity.id_for_label }}">数量/グラム:</label>
+      {{ form.quantity }}
+      {% if form.quantity.errors %}
+        {% for error in form.quantity.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
+      {% endif %}
+  </div>
+
+    <div>
+      <label for="{{ form.expiration_date.id_for_label }}">賞味期限:</label>
+      {{ form.expiration_date }}
+      {% if form.expiration_date.errors %}
+        {% for error in form.expiration_date.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <button type="submit">登録</button>
+  </form>
+  <a href="{% url 'index' %}">一覧へ戻る</a>
+</div>
+{% endblock %}

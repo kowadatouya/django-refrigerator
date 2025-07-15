@@ -10,7 +10,7 @@ class Form(forms.ModelForm):
         model = Ingredient
         fields = ('name', 'quantity', 'expiration_date') # フォームに表示するフィールドを指定
         widgets = { # 特定のフィールドの見た目を指定 datetime-localによりHTMLにて日付＋時刻入力フィールドになる
-            'expiration_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'expiration_date': forms.DateTimeInput(attrs={'type': 'date'}),
         }
 
     def __init__(self, *args, **kwargs): # フォームが生成されるときの初期化処理

@@ -7,6 +7,7 @@
 {% block contents %}
 <div class="index">
   <h1>Refted</h1>
+  <a href="{% url 'add' %}">食材を追加</a>
   <h2>冷蔵庫の食材一覧</h2>
     <ul>
         {% for item in ingredients %}
