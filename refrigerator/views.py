@@ -51,4 +51,19 @@ class addview(View):
                       'refrigerator/add.html',
                       {'form': form, 'id': kwargs.get('id')})
         
-add = addview.as_view()        
+add = addview.as_view()     
+class editview(View):   
+    def get(self, request, pk):
+        print(f'id:{pk},request:{request}')
+        ingredient = get_object_or_404(Ingredient, pk=pk)
+        form = Form(instance=ingredient)
+        return render(request, 'refrigerator/edit.html', {'form': form})
+
+    def post(self, request, pk):
+        ingredient = get_object_or_404(Ingredient, pk=pk)
+        form = Form(request.POST, instance=ingredient)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        return render(request, 'refrigerator/edit.html', {'form': form})
+edit = editview.as_view()

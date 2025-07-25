@@ -11,7 +11,11 @@
   <h2>冷蔵庫の食材一覧</h2>
     <ul>
         {% for item in ingredients %}
-            <li>{{ item.name }}（{{ item.quantity }}個 / 消費期限: {{ item.expiration_date }}）</li>
+            <li>
+                {{ item.name }}（{{ item.quantity }}個 / 消費期限: {{ item.expiration_date }}）
+                [{{ item.pk }}]
+                <a href="{% url 'edit' item.pk %}">編集</a>
+            </li>
         {% empty %}
             <li>食材がありません。</li>
         {% endfor %}
