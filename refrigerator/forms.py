@@ -1,10 +1,8 @@
 from django import forms
 from django.utils import timezone
 from django.core.exceptions import ValidationError
-from .models import Ingredient
+from .models import Ingredient, Recipe
 
-
-# Taskモデル用の入力フォーム
 class Form(forms.ModelForm):
     class Meta: # 構成・設定を指定できる（どのモデルと連携する、どのフィールドを使う、フォームの構成設定など）
         model = Ingredient
@@ -18,3 +16,11 @@ class Form(forms.ModelForm):
 
         self.fields["name"].widget.attrs = {'placeholder': '食材名'} # プレースホルダー（薄い説明文）を設定する
         self.fields["quantity"].widget.attrs = {'placeholder': '数量・グラム'}
+class RecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ('title','ingredients')
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'レシピ名'}),
+            'ingredients': forms.CheckboxSelectMultiple(),  # チェックボックスで複数選択
+        }

@@ -8,3 +8,8 @@ class Ingredient(models.Model):
     
     def __str__(self):
         return self.name
+class Recipe(models.Model):
+    title = models.CharField(max_length=100)
+    ingredients = models.ManyToManyField(Ingredient, related_name="recipes")
+    def __str__(self):
+        return self.title

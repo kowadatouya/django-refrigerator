@@ -5,20 +5,53 @@
 {% endblock %}
 
 {% block contents %}
+<script>
+  function changeQuantity(id, delta) {
+    const input = document.getElementById('quantity_' + id);
+    let value = parseInt(input.value);
+    value = Math.max(0, value + delta);  // 0未満にならないように
+    input.value = value;
+  }
+</script>
+<style>
+    input{
+    width: 4em;
+    }
+</style>
 <div class="index">
   <h1>Refted</h1>
-  <a href="{% url 'add' %}">食材を追加</a>
-  <h2>冷蔵庫の食材一覧</h2>
+  <ul class="list">
+    <h2>冷蔵庫の食材一覧</h2>
+    <a href="{% url 'add' %}">食材を追加</a>
+        <ul>
+            {% for item in ingredients %}
+                <li>
+                    {{ item.name }}（{{ item.quantity }}個 / 消費期限: {{ item.expiration_date }}）
+                    {% comment %} <button type="button" onclick="changeQuantity('{{ item.pk }}', -1)">−</button>
+                    <input type="number" name="quantity_{{ item.pk }}" id="quantity_{{ item.pk }}" value="{{ item.quantity }}" readonly>
+                    <button type="button" onclick="changeQuantity('{{ item.pk }}', 1)">＋</button>
+                    <button type="submit">在庫を保存</button> {% endcomment %}
+                    <a href="{% url 'edit' item.pk %}">編集</a>
+                </li>
+            {% empty %}
+                <li>食材がありません。</li>
+            {% endfor %}
+        </ul>
+   </ul>
+   <ul class="list">
+    <h2>レシピ一覧</h2>
+    <a href="{% url 'offer' %}">レシピを追加</a>
     <ul>
-        {% for item in ingredients %}
-            <li>
-                {{ item.name }}（{{ item.quantity }}個 / 消費期限: {{ item.expiration_date }}）
-                [{{ item.pk }}]
-                <a href="{% url 'edit' item.pk %}">編集</a>
-            </li>
-        {% empty %}
-            <li>食材がありません。</li>
-        {% endfor %}
-    </ul>
+            {% for item in recipes %}
+                <li>
+                    {{ item.title }}
+                    ({{ item.ingredients}})
+                </li>
+            {% empty %}
+                <li>レシピがありません。</li>
+            {% endfor %}
+        </ul>
+   </ul> 
+    
 </div>
 {% endblock %}
