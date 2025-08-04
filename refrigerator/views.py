@@ -135,3 +135,8 @@ class offerview(View):
         else:
             form = RecipeForm()
 offer = offerview.as_view()
+class recipe_detail(View):
+    def detailview(request, pk):
+        recipe = get_object_or_404(Recipe, pk=pk)
+        return render(request, 'refrigerator/recipe_detail.html', {'recipe': recipe})
+detail = recipe_detail.as_view()

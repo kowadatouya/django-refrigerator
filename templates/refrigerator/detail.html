@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe.title }} - 詳細{% endblock %}
+
+{% block contents %}
+  <h1>{{ recipe.title }}</h1>
+  <p><strong>登録食材:</strong></p>
+  <ul>
+    {% for ingredient in recipe.ingredients.all %}
+      <li>{{ ingredient.name }}</li>
+    {% empty %}
+      <li>食材が登録されていません</li>
+    {% endfor %}
+  </ul>
+
+  {% comment %} {% if recipe.memo %}
+    <p><strong>メモ:</strong></p>
+    <p>{{ recipe.memo }}</p>
+  {% endif %} {% endcomment %}
+
+  <a href="{% url 'index' %}">← 一覧に戻る</a>
+{% endblock %}

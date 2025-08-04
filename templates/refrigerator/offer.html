@@ -5,17 +5,6 @@
 {% endblock %}
 
 {% block contents %}
-<script>
-document.getElementById('add-ingredient').addEventListener('click', function() {
-    const container = document.getElementById('extra-ingredients');
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.name = 'extra_ingredients'; // 同じnameで複数送信される
-    input.placeholder = '未登録の食材';
-    container.appendChild(document.createElement('br'));
-    container.appendChild(input);
-});
-</script>
 <div class="add">
   <h1>レシピメモページ</h1>
   <form action="{% url 'offer' %}" method="post">
@@ -49,4 +38,31 @@ document.getElementById('add-ingredient').addEventListener('click', function() {
   </form>
   <a href="{% url 'index' %}">一覧へ戻る</a>
 </div>
+<script>
+document.getElementById('add-ingredient').addEventListener('DOMContentLoaded',  function() {
+    const container = document.getElementById('extra-ingredients');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = 'extra_ingredients'; // 同じnameで複数送信される
+    input.placeholder = '未登録の食材';
+    container.appendChild(document.createElement('br'));
+    container.appendChild(input);
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const button = document.getElementById('add-ingredient');
+  if (button) {
+    button.addEventListener('click', function () {
+      const container = document.getElementById('extra-ingredients');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = 'extra_ingredients';
+      input.placeholder = '未登録の食材';
+      container.appendChild(document.createElement('br'));
+      container.appendChild(input);
+    });
+  }
+});
+</script>
 {% endblock %}

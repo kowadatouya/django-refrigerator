@@ -5,4 +5,5 @@ urlpatterns = [
     path("add/",refrigerator.add,name="add"),
     path('edit/<int:pk>/',refrigerator.edit,name="edit"),
     path('offer/',refrigerator.offer,name="offer"),
+    path('recipes/<int:pk>/', refrigerator.detail, name='recipe_detail'),
 ]
