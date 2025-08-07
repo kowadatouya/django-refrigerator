@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-e4r$@#th2xs^94um4!aa)byc8g6=(^323jfd4tx=u-gfnd-y4p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://django-refrigerator.onrender.com"]
+ALLOWED_HOSTS = ["django-refrigerator.onrender.com"]
 
 
 # Application definition
