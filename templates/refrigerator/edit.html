@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block contents %}
-<div class="edit">
+<div class="add">
   <h1>食材編集ページ</h1>
   <form action="{% url 'edit' pk=form.instance.pk %}" method="post">
     {% csrf_token %}
@@ -41,6 +41,6 @@
 
     <button type="submit">更新</button>
   </form>
-  <a href="{% url 'index' %}">一覧へ戻る</a>
+  <a class="return" class="add" href="{% url 'index' %}">一覧へ戻る</a>
 </div>
 {% endblock %}

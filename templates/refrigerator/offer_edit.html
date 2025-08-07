@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block contents %}
-<div class="edit">
+<div class="add">
   <h1>レシピ編集ページ</h1>
   <form action="{% url 'offer_edit' pk=form.instance.pk %}" method="post">
     {% csrf_token %}
@@ -33,9 +33,8 @@
   </div>
   <button type="button" id="add-ingredient">＋ 食材を追加</button>
   <br><br>
-
+<label for="{{ form.memo.id_for_label }}">メモ（調理方法など）:</label>
   <div>
-      <label for="{{ form.memo.id_for_label }}">メモ（調理方法など）:</label>
       {{ form.memo }}
       {% if form.memo.errors %}
         {% for error in form.memo.errors %}
@@ -46,6 +45,6 @@
 
     <button type="submit">更新</button>
   </form>
-  <a href="{% url 'index' %}">一覧へ戻る</a>
+  <a class="return" class="add" href="{% url 'index' %}">一覧へ戻る</a>
 </div>
 {% endblock %}
