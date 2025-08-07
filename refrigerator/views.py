@@ -135,8 +135,29 @@ class offerview(View):
         else:
             form = RecipeForm()
 offer = offerview.as_view()
-class recipe_detail(View):
-    def detailview(request, pk):
+def detailview(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    return render(request, 'refrigerator/detail.html', {'recipe': recipe})
+class offer_editview(View):   
+    def get(self, request, pk):
+        print(f'id:{pk},request:{request}')
         recipe = get_object_or_404(Recipe, pk=pk)
-        return render(request, 'refrigerator/recipe_detail.html', {'recipe': recipe})
-detail = recipe_detail.as_view()
+        form = RecipeForm(instance=recipe)
+        return render(request, 'refrigerator/offer_edit.html', {'form': form})
+
+    def post(self, request, pk):
+        recipe = get_object_or_404(Recipe, pk=pk)
+        form = RecipeForm(request.POST, instance=recipe)
+        if form.is_valid():
+            form.save()
+            # form.save_m2m()
+            return redirect('index')
+        return render(request, 'refrigerator/offer_edit.html', {'form': form})
+o_edit = offer_editview.as_view()
+def DeleteView(request, id):
+    recipe = get_object_or_404(Recipe, pk=id)
+    print(f'id:{id},request:{request}')
+    if request.method == 'POST':
+        recipe.delete()
+        return redirect('/')
+    return render(request, 'refrigerator/offer_delete.html', {'recipe': recipe})

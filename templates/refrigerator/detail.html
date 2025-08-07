@@ -12,11 +12,10 @@
       <li>食材が登録されていません</li>
     {% endfor %}
   </ul>
-
-  {% comment %} {% if recipe.memo %}
-    <p><strong>メモ:</strong></p>
+  <p><strong>メモ:</strong></p>
+  {% if recipe.memo %}
     <p>{{ recipe.memo }}</p>
-  {% endif %} {% endcomment %}
+  {% endif %}
 
   <a href="{% url 'index' %}">← 一覧に戻る</a>
 {% endblock %}

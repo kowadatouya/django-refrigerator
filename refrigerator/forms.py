@@ -19,7 +19,7 @@ class Form(forms.ModelForm):
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ('title','ingredients')
+        fields = ['title', 'ingredients', 'memo']
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'レシピ名'}),
             'ingredients': forms.CheckboxSelectMultiple(),  # チェックボックスで複数選択

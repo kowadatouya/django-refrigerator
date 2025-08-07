@@ -34,6 +34,16 @@
   <button type="button" id="add-ingredient">＋ 食材を追加</button>
   <br><br>
 
+  <div>
+      <label for="{{ form.memo.id_for_label }}">メモ（調理方法など）:</label>
+      {{ form.memo }}
+      {% if form.memo.errors %}
+        {% for error in form.memo.errors %}
+          <div class="field-error">{{ error }}</div>
+        {% endfor %}
+      {% endif %}
+  </div>
+
     <button type="submit">登録</button>
   </form>
   <a href="{% url 'index' %}">一覧へ戻る</a>

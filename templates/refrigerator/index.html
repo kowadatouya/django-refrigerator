@@ -26,7 +26,7 @@
         <ul>
             {% for item in ingredients %}
                 <li>
-                    {{ item.name }}（{{ item.quantity }}個 / 消費期限: {{ item.expiration_date }}）
+                    {{ item.name }}（{{ item.quantity }} / 消費期限: {{ item.expiration_date }}）
                     {% comment %} <button type="button" onclick="changeQuantity('{{ item.pk }}', -1)">−</button>
                     <input type="number" name="quantity_{{ item.pk }}" id="quantity_{{ item.pk }}" value="{{ item.quantity }}" readonly>
                     <button type="button" onclick="changeQuantity('{{ item.pk }}', 1)">＋</button>
@@ -44,7 +44,11 @@
     <ul>
             {% for item in recipes %}
                 <li>
-                    {{ item.title }}
+                    <a class="recipe-link" href="{% url 'recipe_detail' item.id %}">
+                        {{ item.title }}
+                    </a>
+                    <a href="{% url 'offer_edit' item.pk %}">編集</a>
+                    <a href="{% url 'delete' item.pk %}">削除</a>
                 </li>
             {% empty %}
                 <li>レシピがありません。</li>

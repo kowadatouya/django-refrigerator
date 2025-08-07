@@ -11,5 +11,6 @@ class Ingredient(models.Model):
 class Recipe(models.Model):
     title = models.CharField(max_length=100)
     ingredients = models.ManyToManyField(Ingredient, related_name="recipes")
+    memo = models.TextField(blank=True, null=True)
     def __str__(self):
         return self.title
